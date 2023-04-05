@@ -11,6 +11,7 @@ import { PoetryService } from 'src/app/services/poetry-services.service';
 export class TarjetaObraComponent {
 
   obras: any[] = [];
+  obrasFavoritas: any[] = [];
   loading: boolean = false;
   nameAuthor: string = "";
   @Input() soloFavorito: boolean = false;
@@ -20,6 +21,7 @@ export class TarjetaObraComponent {
     this.router.params.subscribe( params => {
       this.nameAuthor = params['namePoeta']; 
       this.getObras();
+      this.getObrasFavoritas();
     });
   }
 
@@ -38,22 +40,28 @@ export class TarjetaObraComponent {
     this.poetry.getObras(this.nameAuthor)
       .subscribe((data: any) => {
 
-        if (this.soloFavorito) {
-
-          for (let i = 0; i < data.length; i++) {
-            if (localStorage.getItem(data[i].title) != null) {
-              this.obras.push(data[i].title);
-            }
+        for (let i = 0; i < data.length; i++) {
+          if (localStorage.getItem(data[i].title) == null) {
+            this.obras.push(data[i].title);
           }
+        }
 
-        } else {
+        this.loading = false;
+      });
+  }
 
-          for (let i = 0; i < data.length; i++) {
-            if (localStorage.getItem(data[i].title) == null) {
-              this.obras.push(data[i].title);
-            }
+  getObrasFavoritas(): void {
+
+    this.obrasFavoritas = [];
+    this.loading = true;
+
+    this.poetry.getObras(this.nameAuthor)
+      .subscribe((data: any) => {
+
+        for (let i = 0; i < data.length; i++) {
+          if (localStorage.getItem(data[i].title) != null) {
+            this.obrasFavoritas.push(data[i].title);
           }
-
         }
 
         this.loading = false;
@@ -71,6 +79,7 @@ export class TarjetaObraComponent {
     }
     // se actualiza la lista de obras
     this.getObras();
+    this.getObrasFavoritas();
   }
 
   isFavoriteObra(nameObra: string){
