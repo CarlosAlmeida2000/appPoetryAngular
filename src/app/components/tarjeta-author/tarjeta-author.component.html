@@ -1,0 +1,19 @@
+<app-loading class="m-5" *ngIf="loading"></app-loading>
+
+<div *ngIf="!loading" class="carts-poetas">
+    <div *ngFor="let poeta of poetas; let i = index;" class="card cart-poeta shadow mb-3">
+        <img class="imagen" src="assets/img/poeta.jpg" alt="Poetas">
+        <div class="card-body">
+
+            <h5 class="card-title ">{{ poeta }}</h5>
+
+            <div class="favorito">
+
+                <input [checked]="isFavoritePoeta(poeta)" #control (click)="changeFavoritePoeta( poeta, control)" id="poeta-{{ poeta }}" type="checkbox">
+                <label for="poeta-{{ poeta }}">★</label>
+
+            </div>
+
+        </div>
+    </div>
+</div>
