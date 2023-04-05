@@ -1,1 +1,21 @@
-<p>tarjeta-obra works!</p>
+<app-loading class="m-5" *ngIf="loading"></app-loading>
+<div class="mb-4">
+    <h3>Obras de: {{ nameAuthor }}</h3>
+</div>
+<div *ngIf="!loading" class="carts-obra">
+    <div *ngFor="let obra of obras; let i = index;" class="card cart-obra shadow mb-3">
+
+        <div class="card-body">
+
+            <h5 class="card-title ">{{ obra }}</h5>
+
+            <div class="favorito">
+
+                <input [checked]="isFavoriteObra(obra)" #control (click)="changeFavoriteObra( obra, control)" id="obra-{{ obra }}" type="checkbox">
+                <label for="obra-{{ obra }}">★</label>
+
+            </div>
+
+        </div>
+    </div>
+</div>

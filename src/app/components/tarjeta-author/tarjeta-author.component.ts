@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { PoetryService } from 'src/app/services/poetry-services.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class TarjetaAuthorComponent {
   loading: boolean = false;
   @Input() soloFavorito: boolean = false;
   
-  constructor(private poetry: PoetryService) {
+  constructor(private poetry: PoetryService,  private router: Router) {
     this.getAllPoetas();
   }
 
@@ -61,5 +62,9 @@ export class TarjetaAuthorComponent {
 
   isFavoritePoeta(namePoeta: string){
     return localStorage.getItem(namePoeta) == null? false:true;
+  }
+
+  getObras(namePoeta: string){
+    this.router.navigate([ '/obras', namePoeta ]);
   }
 }

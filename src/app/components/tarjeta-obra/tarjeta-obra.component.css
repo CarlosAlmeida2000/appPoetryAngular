@@ -1,0 +1,66 @@
+.carts-obras {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 15px;
+}
+
+.carts-obras .cart-obra {
+    background-color: azure;
+    border-radius: 7%;
+}
+
+@media screen and (max-width: 1550px) {
+    .carts-obras {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media screen and (max-width: 1500px) {
+    .carts-obras {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media screen and (max-width: 1205px) {
+    .carts-obras {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 910px) {
+    .carts-obras {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 444px) {
+    .carts-obras {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+div.favorito {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+div.favorito input {
+    position: absolute;
+    top: -100px;
+}
+
+div.favorito label {
+    float: right;
+    color: #333;
+    width: 38px;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+div.favorito label:hover,
+div.favorito label:hover~label,
+div.favorito input:checked~label {
+    color: #dd4;
+}
