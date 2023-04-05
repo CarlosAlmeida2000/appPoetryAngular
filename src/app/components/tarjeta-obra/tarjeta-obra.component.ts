@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { PoetryService } from 'src/app/services/poetry-services.service';
 
@@ -14,12 +14,14 @@ export class TarjetaObraComponent {
   obrasFavoritas: any[] = [];
   loading: boolean = false;
   nameAuthor: string = "";
+  urlRetorno: string = "";
   @Input() soloFavorito: boolean = false;
   
   constructor(private router: ActivatedRoute, private poetry: PoetryService, private cookies: CookieService) {
     
     this.router.params.subscribe( params => {
       this.nameAuthor = params['namePoeta']; 
+      this.urlRetorno = params['urlRetorno']; 
       this.getObras();
       this.getObrasFavoritas();
     });
@@ -41,7 +43,7 @@ export class TarjetaObraComponent {
       .subscribe((data: any) => {
 
         for (let i = 0; i < data.length; i++) {
-          if (localStorage.getItem(data[i].title) == null) {
+          if (localStorage.getItem('obra-' + data[i].title) == null) {
             this.obras.push(data[i].title);
           }
         }
@@ -59,7 +61,7 @@ export class TarjetaObraComponent {
       .subscribe((data: any) => {
 
         for (let i = 0; i < data.length; i++) {
-          if (localStorage.getItem(data[i].title) != null) {
+          if (localStorage.getItem('obra-' + data[i].title) != null) {
             this.obrasFavoritas.push(data[i].title);
           }
         }
@@ -71,11 +73,11 @@ export class TarjetaObraComponent {
   changeFavoriteObra(nameObra: string, checkbox: HTMLInputElement){
     
     if(checkbox.checked){
-      // registra obra como favorita
-      localStorage.setItem(nameObra, String(checkbox.checked));
+      // registra una obra como favorita
+      localStorage.setItem('obra-' + nameObra, String(checkbox.checked));
     }else{
       // elimina la obra de mis favoritos
-      localStorage.removeItem(nameObra);
+      localStorage.removeItem('obra-' + nameObra);
     }
     // se actualiza la lista de obras
     this.getObras();
@@ -83,6 +85,6 @@ export class TarjetaObraComponent {
   }
 
   isFavoriteObra(nameObra: string){
-    return localStorage.getItem(nameObra) == null? false:true;
+    return localStorage.getItem('obra-' + nameObra) == null? false:true;
   }
 }

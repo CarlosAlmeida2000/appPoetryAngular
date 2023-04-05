@@ -1,1 +1,20 @@
+<div>
+    <h4>
+        Sumario de favoritos
+    </h4>
+    <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Total favoritos:
+            <span class="badge badge-primary badge-pill">{{ totalFavoritos }}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Total poetas favoritos:
+            <span class="badge badge-primary badge-pill">{{ favoritosPoetas }}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Total obras favoritas:
+            <span class="badge badge-primary badge-pill">{{ favoritosObras }}</span>
+        </li>
+    </ul>
+</div>
 <app-tarjeta-author [soloFavorito]=true> </app-tarjeta-author>

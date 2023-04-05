@@ -34,17 +34,17 @@ export class TarjetaAuthorComponent {
       .subscribe((data: any) => {
 
         if (this.soloFavorito) {
-
+          // lista solo los poetas favoritos
           for (let i = 0; i < data.authors.length; i++) {
-            if (localStorage.getItem(data.authors[i]) != null) {
+            if (localStorage.getItem('poeta-' + data.authors[i]) != null) {
               this.poetas.push(data.authors[i]);
             }
           }
 
         } else {
-
+          // lista los poetas que no son favoritos
           for (let i = 0; i < data.authors.length; i++) {
-            if (localStorage.getItem(data.authors[i]) == null) {
+            if (localStorage.getItem('poeta-' + data.authors[i]) == null) {
               this.poetas.push(data.authors[i]);
             }
           }
@@ -58,21 +58,21 @@ export class TarjetaAuthorComponent {
   changeFavoritePoeta(namePoeta: string, checkbox: HTMLInputElement){
     
     if(checkbox.checked){
-      // registra poeta como favoritos
-      localStorage.setItem(namePoeta, String(checkbox.checked));
+      // registra un poeta como favorito
+      localStorage.setItem('poeta-' + namePoeta, String(checkbox.checked));
     }else{
-      // eliminar el poeta de mis favoritos
-      localStorage.removeItem(namePoeta);
+      // elimina el poeta de mis favoritos
+      localStorage.removeItem('poeta-' + namePoeta);
     }
     // se actualiza la lista con los nuevos cambios
     this.getAllPoetas();
   }
 
   isFavoritePoeta(namePoeta: string){
-    return localStorage.getItem(namePoeta) == null? false:true;
+    return localStorage.getItem('poeta-' + namePoeta) == null? false:true;
   }
 
   getObras(namePoeta: string){
-    this.router.navigate([ '/obras', namePoeta ]);
+    this.router.navigate([ '/obras', namePoeta, this.soloFavorito == true?'favorites': 'home' ]);
   }
 }
