@@ -12,6 +12,13 @@ export class NavbarComponent {
   constructor(private routes: Router, private cookies: CookieService) { 
   }
 
+  existeSession(){
+    if(this.cookies.get('session-poetry').length == 0){
+      return false;
+    }
+    return true;
+  }
+
   cerrarSession(){
     this.cookies.delete('session-poetry');
     localStorage.clear();

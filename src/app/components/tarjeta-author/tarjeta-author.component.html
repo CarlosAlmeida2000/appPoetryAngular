@@ -7,7 +7,7 @@
 
             <h5 class="card-title ">{{ poeta }}</h5>
 
-            <div class="favorito">
+            <div class="favorito" *ngIf="existeSession()">
 
                 <input [checked]="isFavoritePoeta(poeta)" #control (click)="changeFavoritePoeta( poeta, control)" id="poeta-{{ poeta }}" type="checkbox">
                 <label for="poeta-{{ poeta }}">★</label>

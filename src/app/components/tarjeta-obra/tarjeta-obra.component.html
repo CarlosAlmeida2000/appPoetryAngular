@@ -1,4 +1,5 @@
 <app-loading class="m-5" *ngIf="loading"></app-loading>
+<a class="btn btn-info mb-3" [routerLink]="['/home']">Regresar</a>
 <div class="mb-4">
     <h3>Obras de: {{ nameAuthor }}</h3>
 </div>
@@ -9,7 +10,7 @@
 
             <h5 class="card-title ">{{ obra }}</h5>
 
-            <div class="favorito">
+            <div class="favorito" *ngIf="existeSession()">
 
                 <input [checked]="isFavoriteObra(obra)" #control (click)="changeFavoriteObra( obra, control)" id="obra-{{ obra }}" type="checkbox">
                 <label for="obra-{{ obra }}">★</label>

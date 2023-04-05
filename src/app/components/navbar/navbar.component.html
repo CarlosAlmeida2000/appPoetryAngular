@@ -14,9 +14,17 @@
             <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link mt-1" [routerLink]="['/favorites']">Favoritos</a>
             </li>
-            <li class="nav-item" style="cursor: pointer;">
-                <a class="nav-link mt-1" (click)="cerrarSession()">Cerrar sesión</a>
+            <li *ngIf="existeSession(); then thenTemplate; else elseTemplate" class="nav-item" style="cursor: pointer;">
+
             </li>
+
+            <ng-template #thenTemplate>
+                <a class="nav-link mt-1 text-danger" (click)="cerrarSession()">Cerrar sesión</a>
+            </ng-template>
+
+            <ng-template #elseTemplate>
+                <a class="nav-link mt-1 text-success" [routerLink]="['/login']">Iniciar sesión</a>
+            </ng-template>
         </ul>
     </div>
 </nav>

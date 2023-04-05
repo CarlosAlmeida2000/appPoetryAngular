@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { PoetryService } from 'src/app/services/poetry-services.service';
 
 @Component({
@@ -14,12 +15,19 @@ export class TarjetaObraComponent {
   nameAuthor: string = "";
   @Input() soloFavorito: boolean = false;
   
-  constructor(private router: ActivatedRoute, private poetry: PoetryService) {
+  constructor(private router: ActivatedRoute, private poetry: PoetryService, private cookies: CookieService) {
     
     this.router.params.subscribe( params => {
       this.nameAuthor = params['namePoeta']; 
       this.getObras();
     });
+  }
+
+  existeSession(){
+    if(this.cookies.get('session-poetry').length == 0){
+      return false;
+    }
+    return true;
   }
 
   getObras(): void {

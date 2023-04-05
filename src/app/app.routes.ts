@@ -10,6 +10,6 @@ export const ROUTES: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'home', component: HomeComponent},
     {path: 'favorites', component: FavoritesComponent, canActivate: [ChekedSessionGuard]},
-    {path: 'obras/:namePoeta', component: TarjetaObraComponent, canActivate: [ChekedSessionGuard]},
+    {path: 'obras/:namePoeta', component: TarjetaObraComponent},
     {path: '**', pathMatch: 'full', redirectTo: 'login' }
 ]

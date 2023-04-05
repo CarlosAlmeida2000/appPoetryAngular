@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { PoetryService } from 'src/app/services/poetry-services.service';
 
 @Component({
@@ -13,8 +14,15 @@ export class TarjetaAuthorComponent {
   loading: boolean = false;
   @Input() soloFavorito: boolean = false;
   
-  constructor(private poetry: PoetryService,  private router: Router) {
+  constructor(private poetry: PoetryService,  private router: Router, private cookies: CookieService) {
     this.getAllPoetas();
+  }
+
+  existeSession(){
+    if(this.cookies.get('session-poetry').length == 0){
+      return false;
+    }
+    return true;
   }
 
   getAllPoetas(): void {
