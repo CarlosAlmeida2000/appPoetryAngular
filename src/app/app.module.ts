@@ -17,6 +17,7 @@ import { ROUTES } from './app.routes';
 import { LoadingComponent } from './components/loading/loading.component';
 import { TarjetaAuthorComponent } from './components/tarjeta-author/tarjeta-author.component';
 import { TarjetaObraComponent } from './components/tarjeta-obra/tarjeta-obra.component';
+import { FragmentosComponent } from './components/fragmentos/fragmentos.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { TarjetaObraComponent } from './components/tarjeta-obra/tarjeta-obra.com
     FavoritesComponent,
     LoadingComponent,
     TarjetaAuthorComponent,
-    TarjetaObraComponent
+    TarjetaObraComponent,
+    FragmentosComponent
   ],
   imports: [
     BrowserModule,

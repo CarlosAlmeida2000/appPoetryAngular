@@ -1,0 +1,15 @@
+<app-loading class="m-5" *ngIf="loading"></app-loading>
+
+<div class="card" *ngFor="let frag of fragmentos">
+    <div class="card-body">
+        <h5 class="card-title">{{ frag.title }}</h5>
+        <p class="card-text">
+            <span class="badge badge-pill badge-primary">
+            {{ frag.author }}
+            </span>
+        </p>
+    </div>
+    <ul class="list-group list-group-flush" *ngFor="let line of frag.lines; let i = index;">
+        <li class="list-group-item">{{ (i + 1)}} - {{ line }}</li>
+    </ul>
+</div>

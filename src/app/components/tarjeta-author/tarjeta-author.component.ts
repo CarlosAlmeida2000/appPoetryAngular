@@ -72,7 +72,7 @@ export class TarjetaAuthorComponent {
     return localStorage.getItem('poeta-' + namePoeta) == null? false:true;
   }
 
-  getObras(namePoeta: string){
+  verObras(namePoeta: string){
     this.router.navigate([ '/obras', namePoeta, this.soloFavorito == true?'favorites': 'home' ]);
   }
 }

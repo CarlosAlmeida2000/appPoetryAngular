@@ -35,6 +35,10 @@
 
                             </div>
 
+
+                            <br>
+                            <a *ngIf="existeSession()" class="nav-link mt-1" [routerLink]="['/fragmento', obra]">Ver fragmento</a>
+
                         </div>
                     </div>
                 </div>
@@ -73,6 +77,10 @@
                                 <label for="obra-{{ obra }}">★</label>
 
                             </div>
+
+
+                            <br>
+                            <a *ngIf="existeSession()" class="nav-link mt-1" [routerLink]="['/fragmento', obra]">Ver fragmento</a>
 
                         </div>
                     </div>
