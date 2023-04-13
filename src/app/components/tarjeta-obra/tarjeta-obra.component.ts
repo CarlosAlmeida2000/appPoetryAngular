@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 import { PoetryService } from 'src/app/services/poetry-services.service';
 
 @Component({
@@ -15,28 +14,20 @@ export class TarjetaObraComponent {
   loading: boolean = false;
   nameAuthor: string = "";
   urlRetorno: string = "";
-  @Input() soloFavorito: boolean = false;
   
-  constructor(private router: ActivatedRoute, private poetry: PoetryService, private cookies: CookieService) {
+  constructor(private router: ActivatedRoute, private poetry: PoetryService) {
     
     this.router.params.subscribe( params => {
       this.nameAuthor = params['namePoeta']; 
       this.urlRetorno = params['urlRetorno']; 
       this.getObras();
-      this.getObrasFavoritas();
     });
-  }
-
-  existeSession(){
-    if(this.cookies.get('session-poetry').length == 0){
-      return false;
-    }
-    return true;
   }
 
   getObras(): void {
 
     this.obras = [];
+    this.obrasFavoritas = [];
     this.loading = true;
 
     this.poetry.getObras(this.nameAuthor)
@@ -45,23 +36,7 @@ export class TarjetaObraComponent {
         for (let i = 0; i < data.length; i++) {
           if (localStorage.getItem('obra-' + data[i].title) == null) {
             this.obras.push(data[i].title);
-          }
-        }
-
-        this.loading = false;
-      });
-  }
-
-  getObrasFavoritas(): void {
-
-    this.obrasFavoritas = [];
-    this.loading = true;
-
-    this.poetry.getObras(this.nameAuthor)
-      .subscribe((data: any) => {
-
-        for (let i = 0; i < data.length; i++) {
-          if (localStorage.getItem('obra-' + data[i].title) != null) {
+          }else if (localStorage.getItem('obra-' + data[i].title) != null){
             this.obrasFavoritas.push(data[i].title);
           }
         }
@@ -81,10 +56,5 @@ export class TarjetaObraComponent {
     }
     // se actualiza la lista de obras
     this.getObras();
-    this.getObrasFavoritas();
-  }
-
-  isFavoriteObra(nameObra: string){
-    return localStorage.getItem('obra-' + nameObra) == null? false:true;
   }
 }

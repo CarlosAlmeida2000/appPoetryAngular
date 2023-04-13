@@ -22,7 +22,7 @@ export class NavbarComponent {
   cerrarSession(){
     this.cookies.delete('session-poetry');
     localStorage.clear();
-    this.routes.navigateByUrl('/');
+    this.routes.navigateByUrl('/home');
   }
 
 }

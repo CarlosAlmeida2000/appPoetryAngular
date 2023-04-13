@@ -16,7 +16,7 @@ export class ChekedSessionGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
       if(this.cookies.get('session-poetry').length == 0){
-        this.routes.navigateByUrl('/');
+        this.routes.navigateByUrl('/login');
         return false;
       }
     return true;

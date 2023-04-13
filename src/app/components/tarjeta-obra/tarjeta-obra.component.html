@@ -28,16 +28,16 @@
 
                             <h5 class="card-title ">{{ obra }}</h5>
 
-                            <div class="favorito" *ngIf="existeSession()">
+                            <div class="favorito">
 
-                                <input [checked]="isFavoriteObra(obra)" #control (click)="changeFavoriteObra( obra, control)" id="obra-{{ obra }}" type="checkbox">
+                                <input checked="true" #control (click)="changeFavoriteObra( obra, control)" id="obra-{{ obra }}" type="checkbox">
                                 <label for="obra-{{ obra }}">★</label>
 
                             </div>
 
 
                             <br>
-                            <a *ngIf="existeSession()" class="nav-link mt-1" [routerLink]="['/fragmento', obra]">Ver fragmento</a>
+                            <a class="nav-link mt-1" [routerLink]="['/fragmento', obra]">Ver fragmento</a>
 
                         </div>
                     </div>
@@ -71,16 +71,16 @@
 
                             <h5 class="card-title ">{{ obra }}</h5>
 
-                            <div class="favorito" *ngIf="existeSession()">
+                            <div class="favorito">
 
-                                <input [checked]="isFavoriteObra(obra)" #control (click)="changeFavoriteObra( obra, control)" id="obra-{{ obra }}" type="checkbox">
-                                <label for="obra-{{ obra }}">★</label>
+                                <input checked="false" #control (click)=" changeFavoriteObra( obra, control) " id="obra-{{ obra }} " type="checkbox ">
+                                <label for="obra-{{ obra }} ">★</label>
 
                             </div>
 
 
                             <br>
-                            <a *ngIf="existeSession()" class="nav-link mt-1" [routerLink]="['/fragmento', obra]">Ver fragmento</a>
+                            <a class="nav-link mt-1 " [routerLink]="[ '/fragmento', obra] ">Ver fragmento</a>
 
                         </div>
                     </div>

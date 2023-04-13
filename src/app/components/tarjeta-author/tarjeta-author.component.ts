@@ -35,12 +35,11 @@ export class TarjetaAuthorComponent {
 
         if (this.soloFavorito) {
           // lista solo los poetas favoritos
-          for (let i = 0; i < data.authors.length; i++) {
-            if (localStorage.getItem('poeta-' + data.authors[i]) != null) {
-              this.poetas.push(data.authors[i]);
+          for(let i = 0; i< localStorage.length; i++){
+            if(localStorage.key(i)?.substring(0, 5) == 'poeta'){
+              this.poetas.push(localStorage.key(i)?.split('-')[1]);
             }
           }
-
         } else {
           // lista los poetas que no son favoritos
           for (let i = 0; i < data.authors.length; i++) {
@@ -48,7 +47,6 @@ export class TarjetaAuthorComponent {
               this.poetas.push(data.authors[i]);
             }
           }
-
         }
 
         this.loading = false;
